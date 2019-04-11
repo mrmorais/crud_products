@@ -1,11 +1,26 @@
 import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core/styles'
 
-export default class MainPage extends Component {
+import NewProduct from './NewProduct'
+import HeaderBar from './HeaderBar'
+import ProductList from './ProductList'
+
+const styles = (theme) => ({
+
+})
+
+class MainPage extends Component {
   render() {
+    const { classes } = this.props
+
     return (
-      <div>
-        <h1>Olá mundo!</h1>
+      <div className="container">
+        <HeaderBar/>
+        <NewProduct/>
+        <ProductList/>
       </div>
     )
   }
 }
+
+export default withStyles(styles)(MainPage)

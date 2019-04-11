@@ -41,7 +41,7 @@ $ node ./dist/server.js
 The React application is bundled by `webpack`, it will generate a single `.js` file `./public/js/bundle.js`.
 
 ```
-4 npm run build:react
+$ npm run build:react
 ```
 
 ## Documentation

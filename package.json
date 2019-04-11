@@ -11,6 +11,7 @@
   "author": "Maradona Morais",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
     "body-parser": "^1.18.3",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",

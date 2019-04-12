@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from "dotenv";
 import bodyParser from 'body-parser'
+import cors from 'cors'
 
 import responseWrapper from './utils/responseWrapper'
 import productRouter from './routers/product'
@@ -11,6 +12,7 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.json(responseWrapper("Up and running"))

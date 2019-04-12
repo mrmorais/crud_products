@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Typography, GridList, GridListTile, GridListTileBar, Card, CardContent } from '@material-ui/core'
+import { connect } from 'react-redux'
+import { Typography, GridList, GridListTile } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 
+import { loadProducts, removeProduct } from '../actions/products'
 import ProductItem from './ProductItem'
 
 const styles= theme => ({
@@ -16,6 +18,14 @@ const styles= theme => ({
 })
 
 class ProductList extends Component {
+  componentDidMount() {
+    this.props.loadProducts()
+  }
+
+  removeProduct = (productId) => {
+    this.props.removeProduct(productId)
+  }
+
   render() {
     const { classes } = this.props
 
@@ -24,11 +34,15 @@ class ProductList extends Component {
         <Typography color="textPrimary" variant="subheading" gutterBottom>All Products</Typography>
         <div>
           <GridList cols={3} cellHeight={120} className={classes.gridList}>
-            <GridListTile key="1"><ProductItem name={'Pdodo fsd sfds sdf '} price={12} /></GridListTile>
-            <GridListTile key="2"><ProductItem name={'Pdodod'} price={12} /></GridListTile>
-            <GridListTile key="3"><ProductItem name={'Pdodod'} price={12} /></GridListTile>
-            <GridListTile key="4"><ProductItem name={'Pdodod'} price={12} /></GridListTile>
-            <GridListTile key="5"><ProductItem name={'Pdodod'} price={12} /></GridListTile>
+            {
+              this.props.products.map((product) => {
+                return (
+                  <GridListTile key={product._id}>
+                    <ProductItem item={product} removeProduct={this.removeProduct} />
+                  </GridListTile>
+                )
+              })
+            }
           </GridList>
         </div>
       </div>
@@ -36,4 +50,21 @@ class ProductList extends Component {
   }
 }
 
-export default withStyles(styles)(ProductList)
+const mapStateToProps = (state) => {
+  return {
+    products: state.products.products
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadProducts: () => {
+      dispatch(loadProducts())
+    },
+    removeProduct: (productId) => {
+      dispatch(removeProduct(productId))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ProductList))

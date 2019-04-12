@@ -58,8 +58,14 @@ product.post('/', (req, res) => {
 /**
  * Create or update a product
  */
-product.put('/', (req, res) => {
-
+product.put('/:id', (req, res) => {
+  productModel.findOneAndUpdate({_id: req.params.id}, req.body, { new: true }, (err, doc) => {
+    if (err) {
+      res.status(500).json(responseWrapper(error.UNDEFINED_ERROR, true))
+    } else {
+      res.json(responseWrapper(doc))
+    }
+  })
 })
 
 /**
@@ -67,7 +73,13 @@ product.put('/', (req, res) => {
  * @param id product id
  */
 product.delete('/:id', (req, res) => {
-
+  productModel.findOneAndDelete({_id: req.params.id}, (err) => {
+    if (err) {
+      res.status(500).json(responseWrapper(error.UNDEFINED_ERROR, true))
+    } else {
+      res.json(responseWrapper(null))
+    }
+  })
 })
 
 export default product

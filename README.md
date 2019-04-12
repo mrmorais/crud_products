@@ -2,6 +2,8 @@
 
 A simple CRUD application on products made with Node + React + MongoDB stack.
 
+![](https://raw.githubusercontent.com/mrmorais/crud_products/master/public/img/printscreen.png?token=AHso8XmRmG6alxul3ahTBixIRNNojKLYks5cuS0HwA%3D%3D)
+
 ## Installation
 
 This project is npm managed, so you must install the required npm packages in the project root directory
@@ -43,5 +45,3 @@ The React application is bundled by `webpack`, it will generate a single `.js` f
 ```
 $ npm run build:react
 ```
-
-## Documentation
